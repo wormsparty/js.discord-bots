@@ -1,0 +1,12 @@
+{
+  "name": "boccalino-bot",
+  "version": "0.0.0",
+  "description": "BoccalinoBot",
+  "main": "app.js",
+  "author": {
+    "name": "worms"
+  },
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
