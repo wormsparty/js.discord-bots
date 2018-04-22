@@ -24,104 +24,104 @@ client.on("ready", () => {
 const data = `
 - les classiques
 204, Marguerite, 15.90, tomates, mozzarella
-205, Napoli, 19.90, anchois, câpres
-206, Capri, 19.90, anchois, câpres, olives
+205, Napoli, 19.90, anchois, cÃ¢pres
+206, Capri, 19.90, anchois, cÃ¢pres, olives
 207, Veneziana, 19.90, jambon
 208, Romana, 19.90, jambon, champignons
 209, Appia, 19.90, anchois, huile de basilic, persil, huile d'olive
 210, Navigation, 20.50, parmesan, pancetta, oignons
-211, Thon, 20.50, thon, huile de basilic, persil, câpres
+211, Thon, 20.50, thon, huile de basilic, persil, cÃ¢pres
 212, Rucola, 21.90, rucola, (copeaux de) parmesan
-213, Fruits de mer, 21.90, (mélange de) fruits de mer
+213, Fruits de mer, 21.90, (mÃ©lange de) fruits de mer
 214, Exotique, 20.50, jambon, ananas, banane
-215, Beau-rivage, 20.50, jambon, artichauts, œuf (dur)
-216, Italia, 20.50, poivrons, jambon, œuf (dur)
-217, Ouchy, 20.50, champignons, asperges, artichauts, œuf (dur)
+215, Beau-rivage, 20.50, jambon, artichauts, Å“uf (dur)
+216, Italia, 20.50, poivrons, jambon, Å“uf (dur)
+217, Ouchy, 20.50, champignons, asperges, artichauts, Å“uf (dur)
 - les gourmandes
-218, Bismark, 21.50, jambon, artichauts, œuf (miroir)
+218, Bismark, 21.50, jambon, artichauts, Å“uf (miroir)
 219, Toscana, 21.50, champignons, asperges, jus de citron, ail, persil, huile d'olive
-220, Valaisanne, 22.50, jambon, viande séchée de cheval, raclette, persil
+220, Valaisanne, 22.50, jambon, viande sÃ©chÃ©e de cheval, raclette, persil
 221, Vaudoise, 22.50, filets de perche, artichauts, ail, persil, jus de citron
-222, Grisonne, 22.50, viande séchée de cheval, salami (piquant), persil
+222, Grisonne, 22.50, viande sÃ©chÃ©e de cheval, salami (piquant), persil
 223, Ticinese, 22.50, salami, pancetta, coppa, champignons
-224, Six fromages, 22.50, mozzarella, gruyère, ricotta, gorgonzola, tomme, parmesan
+224, Six fromages, 22.50, mozzarella, gruyÃ¨re, ricotta, gorgonzola, tomme, parmesan
 225, Capricciosa, 22.50, jambon, artichauts, asperges, olives
-226, Quattro stagioni, 22.50, jambon, champignons, fruits de mer, œuf (dur), olives
-227, Siciliana, 22.50, jambon, poivrons, anchois, œuf (dur)
+226, Quattro stagioni, 22.50, jambon, champignons, fruits de mer, Å“uf (dur), olives
+227, Siciliana, 22.50, jambon, poivrons, anchois, Å“uf (dur)
 228, Boccalino, 22.50, jambon, champignons, chanterelles, olives (vertes)
 239, Tunisienne, 22.50, poivrons, merguez
 229, Calzone alla diavola, 22.50, calzone, jambon cru, ricotta, piments
-230, Calzone alla romana, 22.50, calzone, jambon, jaune d’œuf, parmesan
-231, Calzone alla ricotta, 22.50, calzone, jaune d’œuf, ricotta, parmesan
+230, Calzone alla romana, 22.50, calzone, jambon, jaune dâ€™Å“uf, parmesan
+231, Calzone alla ricotta, 22.50, calzone, jaune dâ€™Å“uf, ricotta, parmesan
 232, Calzone al prosciutto, 22.50, calzone, tomates, mozzarella, jambon, champignons
 - les sportives
-233, FC Lausanne-sport, 22.50, jambon, (2) œuf(s), parmesan
-234, CUST école de régate, 22.50, chanterelles, tomme, jambon cru, ail
-235, L.U.C, 22.50, parmesan, poivrons, œuf (dur), mortadella, salami, champignons, piments
-236, Richard Chassot, 22.50, vacherin fribourgeois, gruyère, jambon, oignons
-237, José Mourinho, 22.50, artichauts, anchois, thon, ail, persil, jus de citron, piments
+233, FC Lausanne-sport, 22.50, jambon, (2) Å“uf(s), parmesan
+234, CUST Ã©cole de rÃ©gate, 22.50, chanterelles, tomme, jambon cru, ail
+235, L.U.C, 22.50, parmesan, poivrons, Å“uf (dur), mortadella, salami, champignons, piments
+236, Richard Chassot, 22.50, vacherin fribourgeois, gruyÃ¨re, jambon, oignons
+237, JosÃ© Mourinho, 22.50, artichauts, anchois, thon, ail, persil, jus de citron, piments
 238, Real Madrid, 22.50, jambon cru
 240, Manchester United, 22.50, champignons, jambon cru, persil, ail, huile d'olive
 241, Michel Platini, 22.50, pancetta, salami (piquant), champignons, oignons
-242, Lionel Messi, 22.50, jambon, champignons, oignons, poivrons, œuf (dur), thon
+242, Lionel Messi, 22.50, jambon, champignons, oignons, poivrons, Å“uf (dur), thon
 243, Vladimir Petkovic, 23.50, jambon, jambon cru, coppa, mortadella, merguez, salami
 244, Dimitri Payet, 22.50, poulet (au curry), champignons, oignons, piments
-245, Stan Wawr., 22.90, gruyère, tomme (vaudoise), champignons, chanterelles, viande séchée de cheval, olives
-246, Maradona, 22.90, câpres, oignons, crevettes, saumon fumé
-247, Zinedine Zidane, 22.90, câpres, oignons, saumon fumé
+245, Stan Wawr., 22.90, gruyÃ¨re, tomme (vaudoise), champignons, chanterelles, viande sÃ©chÃ©e de cheval, olives
+246, Maradona, 22.90, cÃ¢pres, oignons, crevettes, saumon fumÃ©
+247, Zinedine Zidane, 22.90, cÃ¢pres, oignons, saumon fumÃ©
 248, LS Tennis, 22.50, jambon, champignons, poivrons, merguez
 249, Roger Federer, 22.50, jambon, lard, jambon cru, champignons
 250, Antoine Griezmann, 22.50, crevettes, thon, piments, ananas, merguez
-251, John Gobbi, 22.50, jambon, œuf (dur), merguez, poivrons, piments
-252, Christian Constantin, 23.50, raclette, jambon cru, viande séchée de cheval
+251, John Gobbi, 22.50, jambon, Å“uf (dur), merguez, poivrons, piments
+252, Christian Constantin, 23.50, raclette, jambon cru, viande sÃ©chÃ©e de cheval
 253, David Beckham, 22.50, jambon, lard, merguez, ananas, piments
 254, Neymar Jr, 22.50, poulet (au curry), crevettes, ananas
-255, Cristobal Huet, 22.50, gruyère, lard, viande séchée de cheval, œuf (dur)
-256, Benjamin Antonietti, 22.50, jambon, lard, œuf (dur), oignons
+255, Cristobal Huet, 22.50, gruyÃ¨re, lard, viande sÃ©chÃ©e de cheval, Å“uf (dur)
+256, Benjamin Antonietti, 22.50, jambon, lard, Å“uf (dur), oignons
 257, CAN-AM, 22.50, jambon, champignons, salami (piquant), olives
 - les people
-258, DJ Guz, 22.50, viande hâchée de bœuf, jambon, oignons, œuf (miroir), basilic frais
+258, DJ Guz, 22.50, viande hÃ¢chÃ©e de bÅ“uf, jambon, oignons, Å“uf (miroir), basilic frais
 259, Rihanna, 22.50, artichauts, oignons, (copeaux de) parmesan, rucola
 260, Ed Sheeran, 22.50, jambon cru, oignons, champignons, piments
-261, Hugh Jackman, 22.50, jambon, champignons, poivrons, parmesan, câpres, gruyère
-262, Johnny Hallyday, 22.50, jambon, coppa, champignons, poivrons, œuf (dur), olives
+261, Hugh Jackman, 22.50, jambon, champignons, poivrons, parmesan, cÃ¢pres, gruyÃ¨re
+262, Johnny Hallyday, 22.50, jambon, coppa, champignons, poivrons, Å“uf (dur), olives
 264, Adele, 22.90, fruits de mer, crevettes, jambon, oignons, champignons
 265, George Clooney, 22.50, asperges, artichauts, poivrons, champignons
-266, Céline Dion, 22.90, pancetta, jambon, oignons, crevettes, ananas, champignons, banane
+266, CÃ©line Dion, 22.90, pancetta, jambon, oignons, crevettes, ananas, champignons, banane
 - les politiques
 268, Theresa May, 22.50, jambon cru, champignons, olives, oignons, artichauts, piments
 269, Mario Monti, 22.50, pancetta, coppa, jambon cru, salami, champignons, olives, asperges
-270, Donald Trump, 22.90, jambon cru, asperges, thon, œuf (dur), crevettes, ananas
-271, François Hollande, 22.50, merguez, oignons, champignons, huile de basilic, piments
-272, D. Burkhalter c. féd., 22.50, thon, ananas, salami (piquant), piments
-273, A. Berset c. féd., 22.50, thon, ananas, oignons, câpres, crevettes, huile de basilic
-274, D. Leuthard c. féd., 22.50, thon, jambon, champignons, olives, piments
-275, G. Parmelin c.féd., 22.50, jambon, champignons, fruits de mer, lard, oignons
-276, S. sommaruga c. féd., 22.50, jambon, salami, asperges, champignons, ail
-277, J. Schneider-A. c.féd., 22.50, gambas, ail, saumon fumé
-278, U. Maurer c. féd., 22.90, jambon cru, pancetta, mortadella, salami, crevettes, champignons, ail
-263, J. de Quattro c. d’etat, 22.50, jambon, lard (fumé), coppa, mortadella, champignons
-279, P.Y. Maillard c. d’etat, 22.50, viande hâchée de bœuf, poivrons, oignons
-281, B. Métraux c. d’etat, 22.50, jambon, gorgonzola, champignons, ail
-282, A.C. Lyon c. d’etat, 22.50, aubergines, jambon cru
-283, N. Gorrite c. d’etat, 22.50, tomme, piments, ail, chanterelles
-284, P. Broulis c. d’etat, 22.50, lard, olives (noires), oignons
+270, Donald Trump, 22.90, jambon cru, asperges, thon, Å“uf (dur), crevettes, ananas
+271, FranÃ§ois Hollande, 22.50, merguez, oignons, champignons, huile de basilic, piments
+272, D. Burkhalter c. fÃ©d., 22.50, thon, ananas, salami (piquant), piments
+273, A. Berset c. fÃ©d., 22.50, thon, ananas, oignons, cÃ¢pres, crevettes, huile de basilic
+274, D. Leuthard c. fÃ©d., 22.50, thon, jambon, champignons, olives, piments
+275, G. Parmelin c.fÃ©d., 22.50, jambon, champignons, fruits de mer, lard, oignons
+276, S. sommaruga c. fÃ©d., 22.50, jambon, salami, asperges, champignons, ail
+277, J. Schneider-A. c.fÃ©d., 22.50, gambas, ail, saumon fumÃ©
+278, U. Maurer c. fÃ©d., 22.90, jambon cru, pancetta, mortadella, salami, crevettes, champignons, ail
+263, J. de Quattro c. dâ€™etat, 22.50, jambon, lard (fumÃ©), coppa, mortadella, champignons
+279, P.Y. Maillard c. dâ€™etat, 22.50, viande hÃ¢chÃ©e de bÅ“uf, poivrons, oignons
+281, B. MÃ©traux c. dâ€™etat, 22.50, jambon, gorgonzola, champignons, ail
+282, A.C. Lyon c. dâ€™etat, 22.50, aubergines, jambon cru
+283, N. Gorrite c. dâ€™etat, 22.50, tomme, piments, ail, chanterelles
+284, P. Broulis c. dâ€™etat, 22.50, lard, olives (noires), oignons
 285, O. Tosato c. muni., 22.50, gambas, ail, piments, merguez
 286, P.A Hildbrand c. muni., 22.50, jambon, artichauts, champignons, olives, rucola
-287, J-Y. Pidoux c. muni., 22.50, crevettes, olives, oignons, ail, câpres
-288, F. Germond c. muni., 22.50, epinards, poivrons, œuf (dur), chanterelles, champignons
+287, J-Y. Pidoux c. muni., 22.50, crevettes, olives, oignons, ail, cÃ¢pres
+288, F. Germond c. muni., 22.50, epinards, poivrons, Å“uf (dur), chanterelles, champignons
 289, G. Junod c. muni., 22.50, merguez, salami (piquant)
-290, N. litzistorf c. muni., 22.50, tomates (fraîches), anchois, olives (noires), piments
+290, N. litzistorf c. muni., 22.50, tomates (fraÃ®ches), anchois, olives (noires), piments
 291, D. payot c. muni., 22.50, calzone, poulet (au curry), oignons, ananas, piments
 - les amis du Bocca
-293, Sauvetage d’Ouchy, 22.50, oignons, câpres, ail, gambas, ananas, piments
-294, P.A. Schürmann, 22.50, merguez, poivrons, piments, salami (piquant)
-295, Confrérie LS, 22.50, jambon, pancetta, œuf (dur), olives, champignons, merguez, oignons
-296, Philippe Rochat, 22.50, mozzarella di bufala, tomates (fraîches), basilic frais
-297, J.P. Delamuraz, 22.90, fruits de mer, gambas, câpres, piments
-298, J. Zisyadis, 22.50, olives (noires), féta, artichauts, aubergines, salami, piments
+293, Sauvetage dâ€™Ouchy, 22.50, oignons, cÃ¢pres, ail, gambas, ananas, piments
+294, P.A. SchÃ¼rmann, 22.50, merguez, poivrons, piments, salami (piquant)
+295, ConfrÃ©rie LS, 22.50, jambon, pancetta, Å“uf (dur), olives, champignons, merguez, oignons
+296, Philippe Rochat, 22.50, mozzarella di bufala, tomates (fraÃ®ches), basilic frais
+297, J.P. Delamuraz, 22.90, fruits de mer, gambas, cÃ¢pres, piments
+298, J. Zisyadis, 22.50, olives (noires), fÃ©ta, artichauts, aubergines, salami, piments
 300, Guy Delessert, 22.50, crevettes, piments, ananas, fruits de mer
-301, P.O.P Porsche Ouchy Passion, 22.50, jambon cru, tomates (fraîches), parmesan, basilic frais
+301, P.O.P Porsche Ouchy Passion, 22.50, jambon cru, tomates (fraÃ®ches), parmesan, basilic frais
 302, John Kerry, 22.50, poulet, oignons, lard(ons), rucola, (copeaux de) parmesan
 `
 
@@ -203,7 +203,8 @@ client.on("message", async message => {
 
     if (command === "pizza") {
         var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
-        message.channel.send(`${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
+        var msg = `${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`;
+        message.channel.send(msg);
 
         numberServed += 1;
         client.user.setActivity(`Served ${numberServed} pizzas`);
