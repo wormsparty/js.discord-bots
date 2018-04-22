@@ -1,15 +1,11 @@
-// Load up the discord.js library
-const Discord = require("discord.js");
-
-// This is your client. Some people call it `bot`, some people call it `self`, 
-// some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
-// this is what we're refering to. Your client.
-const client = new Discord.Client();
-
-// Here we load the config.json file that contains our token and our prefix values. 
-const config = require("./auth.json");
 // config.token contains the bot's token
 // config.prefix contains the message prefix.
+const config = require("./auth.json");
+const Discord = require("discord.js");
+const client = new Discord.Client();
+
+const schedule = require('node-schedule');
+
 
 var numberServed = 0;
 
@@ -164,16 +160,15 @@ for (i = 0; i < lines.length; i++) {
     allNb.push(nb);
 }
 
-client.on("message", async message => {
-    // This event will run on every single message received, from any channel or DM.
+client.on("message", async message =>
+{
+    // Don't answer to bots
+    if (message.author.bot)
+        return;
 
-    // It's good practice to ignore other bots. This also makes your bot ignore itself
-    // and not get into a spam loop (we call that "botception").
-    if (message.author.bot) return;
-
-    // Also good practice to ignore any message that does not start with our prefix, 
-    // which is set in the configuration file.
-    if (message.content.indexOf(config.prefix) !== 0) return;
+    // Ignore messages without our predefined prefixes
+    if (message.content.indexOf(config.prefix) !== 0)
+        return;
 
     // Here we separate our "command" name, and our "arguments" for the command. 
     // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
@@ -182,32 +177,40 @@ client.on("message", async message => {
     const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
-    // Let's go with a few common example commands! Feel free to delete or change those.
-
-    if (command === "ping") {
+    if (command === "ping")
+    {
         // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
         // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
         const m = await message.channel.send("Ping?");
         m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
     }
 
-    if (command === "say") {
-        // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
-        // To get the "message" itself we join the `args` back into a string with spaces: 
+    if (command === "say")
+    {
         const sayMessage = args.join(" ");
-        // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+        // Try and delete the user's message. Ignore the error if any.
         message.delete().catch(O_o => { });
-        // And we get the bot to say the thing: 
+        // Say the thing
         message.channel.send(sayMessage);
     }
 
-    if (command === "pizza") {
+    if (command === "pizza")
+    {
+        // Generate a random piza
         var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
         message.channel.send(`Here you go <@${message.author.id}>:\n ${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
 
         numberServed += 1;
         client.user.setActivity(`Served ${numberServed} pizzas`);
     }
+});
+
+// Every Monday at 11 in the morning, send something to ask everyone for a pizza!
+var j = schedule.scheduleJob('0 0 11 * * 1', function () {
+//    var channel = client.channels.get('388270907820474368');
+    var channel = client.channels.get('437580444616359937');
+    
+    channel.send('It is time to choose your pizza! Choose wisely.\nI can help you, just say the magic word: !pizza');
 });
 
 client.login(config.token);
