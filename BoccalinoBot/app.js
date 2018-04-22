@@ -203,8 +203,7 @@ client.on("message", async message => {
 
     if (command === "pizza") {
         var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
-        var msg = `${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`;
-        message.channel.send(msg);
+        message.channel.send(`Here you go <@${message.author.id}>:\n ${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
 
         numberServed += 1;
         client.user.setActivity(`Served ${numberServed} pizzas`);
