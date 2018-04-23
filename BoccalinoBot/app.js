@@ -165,8 +165,6 @@ client.on("message", async message =>
 
     const args = message.content.trim().split(/ +/g);
 
-    console.log(message.channel.type);
-
     if (args.indexOf(me) > -1 || message.channel.type === 'dm') {
         mentionnedMe = true;
     }
