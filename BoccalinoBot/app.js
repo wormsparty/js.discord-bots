@@ -140,7 +140,7 @@ for (i = 0; i < lines.length; i++) {
         var ingredient = normalize(elements[j].replace(/\(.*?\)/g, '').replace('œ', 'oe').trim());
 
         if (ingredient.indexOf(' ') > -1)
-            ingredient = `'${ingredient}'`;
+            ingredient = `"${ingredient}"`;
 
         if (!allIngredients.includes(ingredient))
             allIngredients.push(ingredient);
@@ -167,7 +167,7 @@ client.on("message", async message =>
     var mentionnedMe = false;
     var isPizza = false;
 
-    var args = normalize(message.content.trim()).match(/[!\w]+|'[^']+'/g);
+    var args = normalize(message.content.trim()).match(/[!\w]+|"[^"]+"/g);
 
     if (args == null || args.length == 0)
         return;
