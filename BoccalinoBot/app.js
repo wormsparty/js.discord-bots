@@ -244,7 +244,10 @@ client.on("message", async message =>
                 if (ignoredIngredients.length > 0)
                     answer += `Also: the following ingredients are not valid: ` + ignoredIngredients + `.\nYou can use !ingredients to list them all.`;
 
-                message.channel.send(answer);
+                if (answer.length > 2000)
+                    message.channel.send(`Hey <@${message.author.id}>, this request generated too much text. Try something more precise`);
+                else
+                    message.channel.send(answer);
             }
         }
     }
