@@ -192,9 +192,7 @@ client.on("message", async message =>
 
 // Every Monday at 11 in the morning, send something to ask everyone for a pizza!
 var j = schedule.scheduleJob('0 0 11 * * 1', function () {
-//    var channel = client.channels.get('388270907820474368');
-    var channel = client.channels.get('437580444616359937');
-    
+    var channel = client.channels.get('388270907820474368');    
     channel.send('It is time to choose your pizza! Choose wisely.\nI can help you, just say the magic word: !pizza');
 });
 
