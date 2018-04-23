@@ -1,20 +1,13 @@
 // config.token contains the bot's token
-// config.prefix contains the message prefix.
 const config = require("./auth.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
 const schedule = require('node-schedule');
 
-
-var numberServed = 0;
-
 client.on("ready", () => {
-    // This event will run if the bot starts, and logs in, successfully.
     console.log(`Bot has started`);
-    // Example of changing the bot's playing game to something useful. `client.user` is what the
-    // docs refer to as the "ClientUser".
-    client.user.setActivity(`Served ${numberServed} pizzas`);
+    client.user.setActivity('');
 });
 
 const data = `
@@ -166,42 +159,35 @@ client.on("message", async message =>
     if (message.author.bot)
         return;
 
-    // Ignore messages without our predefined prefixes
-    if (message.content.indexOf(config.prefix) !== 0)
-        return;
+    var me = `<@437536904360230922>`;
+    var mentionnedMe = false;
+    var isPizza = false;
 
-    // Here we separate our "command" name, and our "arguments" for the command. 
-    // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
-    // command = say
-    // args = ["Is", "this", "the", "real", "life?"]
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-
-    if (command === "ping")
-    {
-        // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
-        // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
-        const m = await message.channel.send("Ping?");
-        m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+    if (message.content.indexOf(me) !== 0) {
+        mentionnedMe = true;
     }
 
-    if (command === "say")
-    {
-        const sayMessage = args.join(" ");
-        // Try and delete the user's message. Ignore the error if any.
-        message.delete().catch(O_o => { });
-        // Say the thing
-        message.channel.send(sayMessage);
+    if (message.content.IndexOf('!pizza') !== 0) {
+        isPizza = true;
     }
 
-    if (command === "pizza")
+    if (message.content.startsWith("!say"))
     {
-        // Generate a random piza
+        var channel = client.channels.get('437580444616359937');
+
+        const args = message.content.slice(1).trim().split(/ +/g);
+        const command = args.shift().toLowerCase();
+
+        channel.send(args.join(" "));
+    }
+
+    if (mentionnedMe && !isPizza) {
+        message.channel.send(`Hi! I'm glad you mentionned me. Please send !pizza on any channel or by PM to be served a sweet sweet pizza.`)
+    }
+    else if (isPizza) { 
+        // Generate a random pizza
         var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
         message.channel.send(`Here you go <@${message.author.id}>:\n ${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
-
-        numberServed += 1;
-        client.user.setActivity(`Served ${numberServed} pizzas`);
     }
 });
 
