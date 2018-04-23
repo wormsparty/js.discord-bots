@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 const schedule = require('node-schedule');
+const normalize = require('normalize-strings');
 
 client.on("ready", () => {
     console.log(`Bot has started`);
@@ -136,7 +137,10 @@ for (i = 0; i < lines.length; i++) {
     // elements now contains the ingredients
 
     for (var j = 0; j < elements.length; j++) {
-        var ingredient = elements[j].replace(/\(.*?\)/g, '').trim();
+        var ingredient = normalize(elements[j].replace(/\(.*?\)/g, '').replace('œ', 'oe').trim());
+
+        if (ingredient.indexOf(' ') > -1)
+            ingredient = `'${ingredient}'`;
 
         if (!allIngredients.includes(ingredient))
             allIngredients.push(ingredient);
@@ -163,37 +167,95 @@ client.on("message", async message =>
     var mentionnedMe = false;
     var isPizza = false;
 
-    const args = message.content.trim().split(/ +/g);
+    var args = message.content.trim().match(/[!\w]+|'[^']+'/g)
 
-    if (args.indexOf(me) > -1 || message.channel.type === 'dm') {
+    console.log('Args = ' + args);
+
+    if (args.length == 0)
+        return;
+
+    if (args.indexOf(me) > -1 || message.channel.type === 'dm')
         mentionnedMe = true;
-    }
 
-    if (args.indexOf('!pizza') > -1) {
+    if (args.indexOf('!pizza') > -1)
         isPizza = true;
+
+    if (args.indexOf('!ingredients') > -1) {
+        message.channel.send(`Hey <@${message.author.id}>, here are all the ingredients:\n${allIngredients}`);
+        return;
     }
 
-    if (message.content.startsWith("!say"))
+    if (args.length > 0 && args[0] === '!say')
     {
-        var channel = client.channels.get('437580444616359937');        
+        var channel = client.channels.get('388270907820474368');        
         args.shift();
         channel.send(args.join(" "));
     }
 
     if (mentionnedMe && !isPizza) {
-        message.channel.send(`Hi! I'm glad you mentionned me. Please send !pizza on any channel or by PM to be served a sweet sweet pizza.`)
+        message.channel.send(`Hi <@${message.author.id}>! I'm glad you mentionned me. Please send !pizza or !ingredients on any channel or by PM to be served a sweet sweet pizza.`)
     }
     else if (isPizza) { 
-        // Generate a random pizza
-        var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
-        message.channel.send(`Here you go <@${message.author.id}>:\n ${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
+        var validIngredients = [];
+        var ignoredIngredients = [];
+        var i;
+
+        if (args.length == 1) {
+            var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
+            message.channel.send(`Here's your random pizza <@${message.author.id}>:\n${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
+            return;
+        }
+
+        for (i = 0; i < args.length; i++) {
+            var normalized = normalize(args[i].replace('œ', 'oe').toLowerCase());
+
+            if (allIngredients.indexOf(normalized) > -1) {
+                validIngredients.push(normalized);
+            } else if (normalized !== '!pizza') {
+                ignoredIngredients.push(normalized);
+            }
+        }
+
+        if (validIngredients.length == 0) {
+            message.channel.send(`Sorry <@${message.author.id}>, no ingredient listed was valid. Use !ingredients to list them all`);
+        }
+        else {
+            var validNumbers = ingredientsToNo[validIngredients[0]];
+
+            for (i = 1; i < validIngredients.length; i++) {
+                var nbs = ingredientsToNo[validIngredients[i]];
+                var j;
+
+                for (j = 0; j < validNumbers.length; j++) {
+                    if (!nbs.includes(validNumbers[j])) {
+                        validNumbers.splice(j, 1);
+                        j--;
+                    }
+                }
+            }
+
+            if (validNumbers.length == 0) {
+                message.channel.send(`Sorry <@${message.author.id}>, there's no match. Try and be less picky.`);
+            } else {
+                var answer = `Here's your matches <@${message.author.id}>:\n`;
+
+                for (i = 0; i < validNumbers.length; i++) {
+                    answer += `${validNumbers[i]}, ${noToPizza[validNumbers[i]]}, ${noToIngredients[validNumbers[i]]}\n`;
+                }
+
+                if (ignoredIngredients.length > 0)
+                    answer += `Also: the following ingredients are not valid: ` + ignoredIngredients + `.\nYou can use !ingredients to list them all.`;
+
+                message.channel.send(answer);
+            }
+        }
     }
 });
 
 // Every Monday at 11 in the morning, send something to ask everyone for a pizza!
 var j = schedule.scheduleJob('0 0 11 * * 1', function () {
     var channel = client.channels.get('388270907820474368');    
-    channel.send('It is time to choose your pizza! Choose wisely.\nI can help you, just say the magic word: !pizza');
+    channel.send('It is time to choose your pizza! Choose wisely.\nI can help you, just say the magic word: !pizza. !ingredients can also be useful');
 });
 
 client.login(config.token);
