@@ -165,11 +165,11 @@ client.on("message", async message =>
 
     const args = message.content.trim().split(/ +/g);
 
-    if (args.indexOf(me) > -1) {
+    console.log(message.channel.type);
+
+    if (args.indexOf(me) > -1 || message.channel.type === 'dm') {
         mentionnedMe = true;
     }
-    else
-        console.log(args);
 
     if (args.indexOf('!pizza') > -1) {
         isPizza = true;
@@ -177,9 +177,7 @@ client.on("message", async message =>
 
     if (message.content.startsWith("!say"))
     {
-//        var channel = client.channels.get('437580444616359937');
-        var channel = client.channels.get('437853146048495616');
-        
+        var channel = client.channels.get('437580444616359937');        
         args.shift();
         channel.send(args.join(" "));
     }
