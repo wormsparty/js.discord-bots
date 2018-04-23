@@ -159,25 +159,28 @@ client.on("message", async message =>
     if (message.author.bot)
         return;
 
-    var me = `<@437536904360230922>`;
+    var me = `<@!437536904360230922>`;
     var mentionnedMe = false;
     var isPizza = false;
 
-    if (message.content.indexOf(me) !== 0) {
+    const args = message.content.trim().split(/ +/g);
+
+    if (args.indexOf(me) > -1) {
         mentionnedMe = true;
     }
+    else
+        console.log(args);
 
-    if (message.content.IndexOf('!pizza') !== 0) {
+    if (args.indexOf('!pizza') > -1) {
         isPizza = true;
     }
 
     if (message.content.startsWith("!say"))
     {
-        var channel = client.channels.get('437580444616359937');
-
-        const args = message.content.slice(1).trim().split(/ +/g);
-        const command = args.shift().toLowerCase();
-
+//        var channel = client.channels.get('437580444616359937');
+        var channel = client.channels.get('437853146048495616');
+        
+        args.shift();
         channel.send(args.join(" "));
     }
 
