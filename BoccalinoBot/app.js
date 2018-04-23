@@ -167,11 +167,9 @@ client.on("message", async message =>
     var mentionnedMe = false;
     var isPizza = false;
 
-    var args = message.content.trim().match(/[!\w]+|'[^']+'/g)
+    var args = normalize(message.content.trim()).match(/[!\w]+|'[^']+'/g);
 
-    console.log('Args = ' + args);
-
-    if (args.length == 0)
+    if (args == null || args.length == 0)
         return;
 
     if (args.indexOf(me) > -1 || message.channel.type === 'dm')
