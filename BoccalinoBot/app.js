@@ -166,10 +166,11 @@ client.on("message", async message =>
     var me = `<@!437536904360230922>`;
     var mentionnedMe = false;
     var isPizza = false;
+    var isIngredients = false;
 
     var args = normalize(message.content.trim()).match(/[!\w]+|"[^"]+"/g);
 
-    if (args == null || args.length == 0)
+    if (args == null || args.length === 0)
         return;
 
     if (args.indexOf(me) > -1 || message.channel.type === 'dm')
@@ -179,15 +180,32 @@ client.on("message", async message =>
         isPizza = true;
 
     if (args.indexOf('!ingredients') > -1) {
-        message.channel.send(`Hey <@${message.author.id}>, here are all the ingredients:\n${allIngredients}`);
-        return;
+        isIngredients = true;
     }
 
     if (args.length > 0 && args[0] === '!say')
     {
-        var channel = client.channels.get('388270907820474368');        
+        const channel = client.channels.get('388270907820474368');
         args.shift();
-        channel.send(args.join(" "));
+        channel.send(message.content.replace('!say ', '').trim());
+        return;
+    }
+
+    if (!isIngredients && !isPizza && !mentionnedMe) {
+        return;
+    }
+
+    var date = new Date();
+
+    if (date.getDay() !== 1)
+    {
+        message.channel.send(`Hey, <@${message.author.id}>, I'm not being paid to work outside of Mondays. See ya`);
+        return;
+    }
+
+    if (isIngredients) {
+        message.channel.send(`Hey <@${message.author.id}>, here are all the ingredients:\n${allIngredients}`);
+        return;
     }
 
     if (mentionnedMe && !isPizza) {
@@ -198,7 +216,7 @@ client.on("message", async message =>
         var ignoredIngredients = [];
         var i;
 
-        if (args.length == 1) {
+        if (args.length === 1) {
             var randomNb = allNb[Math.floor(Math.random() * allNb.length)];
             message.channel.send(`Here's your random pizza <@${message.author.id}>:\n${randomNb}, ${noToPizza[randomNb]}, ${noToIngredients[randomNb]}`);
             return;
@@ -214,7 +232,7 @@ client.on("message", async message =>
             }
         }
 
-        if (validIngredients.length == 0) {
+        if (validIngredients.length === 0) {
             message.channel.send(`Sorry <@${message.author.id}>, no ingredient listed was valid. Use !ingredients to list them all`);
         }
         else {
@@ -232,7 +250,7 @@ client.on("message", async message =>
                 }
             }
 
-            if (validNumbers.length == 0) {
+            if (validNumbers.length === 0) {
                 message.channel.send(`Sorry <@${message.author.id}>, there's no match. Try and be less picky.`);
             } else {
                 var answer = `Here's your matches <@${message.author.id}>:\n`;
