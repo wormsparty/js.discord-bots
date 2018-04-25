@@ -1,5 +1,4 @@
 // config.token contains the bot's token
-const config = require("./auth.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -277,4 +276,4 @@ var j = schedule.scheduleJob('0 0 11 * * 1', function () {
     channel.send('It is time to choose your pizza! Choose wisely.\nI can help you, just say the magic word: !pizza. !ingredients can also be useful');
 });
 
-client.login(config.token);
+client.login("NDM3NTM2OTA0MzYwMjMwOTIy.Db3ftA.tSKCKCYq1iCh0eu0yhicW85EmQo");
