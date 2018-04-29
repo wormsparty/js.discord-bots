@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d80f6240-c3b6-4a91-a222-62c174ec2445</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>boccalibot.js</StartupFile>
+    <StartupFile>runbot.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -29,9 +29,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="boccalibot.js" />
-    <Compile Include="musicrecommender.js">
+    <Compile Include="adventurebot.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="runbot.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
