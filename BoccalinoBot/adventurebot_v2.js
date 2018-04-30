@@ -255,7 +255,7 @@ module.exports = {
                                     joueur.position = 0;
                                 } else if (joueur.position === 4) {
                                     message.channel.send(
-                                        `> Vous préférez monter la rue depuis l'autre côté du troitoire.`);
+                                        `> Vous préférez monter la rue depuis l'autre côté du trottoir.`);
                                 } else if (joueur.position === 5) {
                                     message.channel.send(`> Aïe! Vous êtes à l'intérieur, il y a donc des murs.`);
                                 }
@@ -318,7 +318,7 @@ module.exports = {
                                     message.channel.send(`> Il n'y a pas de chemin pour continuer.`);
                                 } else if (joueur.position === 4) {
                                     message.channel.send(
-                                        `> Vous préférez descendre la rue depuis l'autre côté du troitoire.`);
+                                        `> Vous préférez descendre la rue depuis l'autre côté du trottoir.`);
                                 } else if (joueur.position === 5) {
                                     message.channel.send(`> Aïe! Vous êtes à l'intérieur, il y a donc des murs.`);
                                 }
