@@ -124,14 +124,14 @@ module.exports = {
                     mauvaisesReponses1++;
                     mauvaisesReponses2++;
 
-                    if (mauvaisesReponses1 >= 25)
+                    if (mauvaisesReponses1 >= 13)
                     {
                         message.channel.send(`Je vais répéter la question au cas où:`);
                         message.channel.send('Q' + (currentQuestion + 1) + ': ' + questions[currentQuestion].Q);
                         mauvaisesReponses1 = 0;
                     }
 
-                    if (mauvaisesReponses2 >= 50)
+                    if (mauvaisesReponses2 >= 25)
                     {
                         message.channel.send(`Indice: la première lettre de la réponse est: ${questions[currentQuestion].A[0]}`);
                         mauvaisesReponses2 = 0;
