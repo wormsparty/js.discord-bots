@@ -152,6 +152,17 @@ for (i = 0; i < lines.length; i++) {
     allNb.push(nb);
 }
 
+function isValid(ingredients, ingredientsToIgnore) {
+    let i;
+
+    for (i = 0; i < ingredientsToIgnore.length; i++) {
+        if (ingredients.indexOf(ingredientsToIgnore[i]) > -1)
+            return false;
+    }
+
+    return true;
+}
+
 const answer = function(message) {
     // Don't answer to bots
     if (message.author.bot)
@@ -162,7 +173,7 @@ const answer = function(message) {
     let isPizza = false;
     let isIngredients = false;
 
-    let args = normalize(message.content.trim()).match(/[!\w]+|"[^"]+"/g);
+    let args = normalize(message.content.trim()).match(/[!\-\w]+|"[^"]+"/g);
 
     if (args == null || args.length === 0)
         return;
@@ -207,6 +218,7 @@ const answer = function(message) {
     }
     else if (isPizza) {
         let validIngredients = [];
+        let ingredientsToIgnore = [];
         let ignoredIngredients = [];
         let i;
 
@@ -219,10 +231,20 @@ const answer = function(message) {
         for (i = 0; i < args.length; i++) {
             let normalized = normalize(args[i].replace('œ', 'oe').toLowerCase());
 
-            if (allIngredients.indexOf(normalized) > -1) {
-                validIngredients.push(normalized);
-            } else if (normalized !== '!pizza') {
-                ignoredIngredients.push(normalized);
+            if (normalized.startsWith('-')) {
+                let withoutMinus = normalized.substring(1);
+
+                if (allIngredients.indexOf(withoutMinus) > -1) {
+                    ingredientsToIgnore.push(withoutMinus);
+                } else {
+                    ignoredIngredients.push(withoutMinus);
+                }
+            } else {
+                if (allIngredients.indexOf(normalized) > -1) {
+                    validIngredients.push(normalized);
+                } else if (normalized !== '!pizza') {
+                    ignoredIngredients.push(normalized);
+                }
             }
         }
 
@@ -244,23 +266,26 @@ const answer = function(message) {
                 }
             }
 
-            if (validNumbers.length === 0) {
-                message.channel.send(`Sorry <@${message.author.id}>, there's no match. Try and be less picky.`);
-            } else {
-                let answer = `Here's your matches <@${message.author.id}>:\n`;
+            let answer = `Here's your matches <@${message.author.id}>:\n`;
+            let matches = 0;
 
-                for (i = 0; i < validNumbers.length; i++) {
+            for (i = 0; i < validNumbers.length; i++) {
+                if (isValid(noToIngredients[validNumbers[i]], ingredientsToIgnore)) {
                     answer += `${validNumbers[i]}, ${noToPizza[validNumbers[i]]}, ${noToIngredients[validNumbers[i]]}\n`;
+                    matches++;
                 }
-
-                if (ignoredIngredients.length > 0)
-                    answer += `Also: the following ingredients are not valid: ` + ignoredIngredients + `.\nYou can use !ingredients to list them all.`;
-
-                if (answer.length > 2000)
-                    message.channel.send(`Hey <@${message.author.id}>, this request generated too much text. Try something more precise`);
-                else
-                    message.channel.send(answer);
             }
+
+            if (matches === 0)
+                answer += `None!`;
+
+            if (ignoredIngredients.length > 0)
+                answer += `Also: the following ingredients are not valid: ` + ignoredIngredients + `.\nYou can use !ingredients to list them all.`;
+
+            if (answer.length > 2000)
+                message.channel.send(`Hey <@${message.author.id}>, this request generated too much text. Try something more precise`);
+            else
+                message.channel.send(answer);
         }
     }
 };

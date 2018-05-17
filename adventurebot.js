@@ -91,7 +91,7 @@ module.exports = {
                     } else if (msg.indexOf('manager') > -1 || msg.indexOf('collegue') > -1) {
                         message.channel.send(`> Ils sont tous à Berne`);
                         return;
-                    } else if (msg.indexOf('rentre') > -1) {
+                    } else if (msg.indexOf('rentre') > -1 || msg.indexOf('parti') > -1 || msg.indexOf('fuir') > -1 || msg.indexOf('demission') > -1 || msg.indexOf('sorti') > -1) {
                         message.channel.send(
                             `> Vous avez décidé de rentrez chez vous, et vous jouez à Mario Kart avec votre moitié. Tout finit bien. Gagné!`);
                         joueur.state = 3;
