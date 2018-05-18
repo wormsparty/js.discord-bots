@@ -21,23 +21,54 @@ let generateQuestion = function()
 {
     currentQuestionNb++;
 
-    let rnd = getRandomInt(0, 4);
+    let rnd = getRandomInt(0, 3);
 
     if (rnd === 0)
     {
-        let s = getRandomInt(0, 9);
+        /*let s = getRandomInt(0, 9);
         let e = getRandomInt(10, 20);
 
-        currentQuestion = `y = ∫xdx, x=[${s},${e}], y = ?`;
-        currentAnswer = `${Math.round(e*e/2 - s*s/2)}`;
+        currentQuestion = `y = ∫5xdx, x=[${s},${e}], y = ?`;
+        currentAnswer = `${Math.round(10 * 5 * (e*e/2 - s*s/2))/10}`;*/
+
+        let s = getRandomInt(2, 9);
+        let e = getRandomInt(2, 9);
+
+        currentQuestion = `${s}^${e}`;
+        currentAnswer = `${Math.pow(s, e)}`;
     }
     else if (rnd === 1)
     {
-        let s = getRandomInt(15, 30);
+        /*let s = getRandomInt(15, 30);
         let e = getRandomInt(2, 4);
 
-        currentQuestion = `C(${s}, ${e}) - combien de possibilités de prendre X éléments d'un groupe de Y?`;
-        currentAnswer = `${Math.round(factorielle(s) / factorielle(s - e) / factorielle(e))}`;
+        currentQuestion = `C(${s}, ${e})`;
+        currentAnswer = `${Math.round(factorielle(s) / factorielle(s - e) / factorielle(e))}`;*/
+
+        let s = getRandomInt(1, 1000);
+        let e = getRandomInt(1, 1000);
+        let r = getRandomInt(0, 3);
+
+        if (r === 0)
+        {
+            currentQuestion = `${s}+${e}`;
+            currentAnswer = `${s+e}`;
+        }
+        else if (r === 1)
+        {
+            currentQuestion = `${s}-${e}`;
+            currentAnswer = `${s-e}`;
+        }
+        else if (r === 2)
+        {
+            currentQuestion = `${s}*${e}`;
+            currentAnswer = `${s*e}`;
+        }
+        else if (r === 3)
+        {
+            currentQuestion = `int(${s}/${e})`;
+            currentAnswer = `${Math.floor(s/e)}`;
+        }
     }
     else if (rnd === 2)
     {
@@ -47,7 +78,7 @@ let generateQuestion = function()
         currentQuestion = `Racine ${s}e de ${Math.round(Math.pow(e, s))} = ?`;
         currentAnswer = `${e}`;
     }
-    else if (rnd === 3)
+    /*else if (rnd === 3)
     {
         let primes1 = [], primes2 = [];
         let pgcd = 1;
@@ -85,6 +116,32 @@ let generateQuestion = function()
         let s = getRandomInt(5, 20);
         currentQuestion = `S'il y a ${s} personnes qui trinquent, combien de verres se touchent?`;
         currentAnswer = `${Math.round(s * (s - 1) / 2)}`;
+    }*/
+    else if (rnd === 3)
+    {
+        let sum = getRandomInt(1, 9);
+
+        currentQuestion = '' + sum;
+        let i;
+
+        for( i = 0 ; i < 10; i++)
+        {
+            let j = getRandomInt(1, 9);
+            let k = getRandomInt(0, 1);
+
+            if (k === 0)
+            {
+                sum += j;
+                currentQuestion += '+' + j;
+            }
+            else
+            {
+                sum -= j;
+                currentQuestion += '-' + j;
+            }
+        }
+
+        currentQuestion = `${sum}`;
     }
 
     console.log('Question: ' + currentQuestion);
