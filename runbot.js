@@ -4,5 +4,5 @@
 //const adventurebot = require('./adventurebot_v2.js');
 //adventurebot.run();
 
-const quizbot = require('./quizbot.js');
+const quizbot = require('./dynamicquizbot.js');
 quizbot.run();

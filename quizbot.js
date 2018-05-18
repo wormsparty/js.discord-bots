@@ -32,7 +32,7 @@ let questions = [
     { Q: 'x+y+z+a = 1, x-y+z = 2, x-a = 5, z = 4, a = ?', A: '-5'},*/
 
     // Trivia
-    { Q: `En quelle année a été publié 1984?`, A: '1949'},
+    { Q: `1/`, A: '1949'},
     { Q: `Qui est vert et mélange les mots de sa phrase?`, A: 'yoda'},
     { Q: `Qu'est-ce qui est plus fort que toi?`, A: 'sega'},
     { Q: `Il n'y a que ta mère pour le croire`, A: `c'est de l'eau`},
