@@ -141,7 +141,7 @@ let generateQuestion = function()
             }
         }
 
-        currentQuestion = `${sum}`;
+        currentAnswer = `${sum}`;
     }
 
     console.log('Question: ' + currentQuestion);
