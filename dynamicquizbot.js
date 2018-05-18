@@ -29,23 +29,23 @@ let generateQuestion = function()
         let e = getRandomInt(10, 20);
 
         currentQuestion = `y = ∫xdx, x=[${s},${e}], y = ?`;
-        currentAnswer = `${e*e/2 - s*s/2}`;
+        currentAnswer = `${Math.round(e*e/2 - s*s/2)}`;
     }
     else if (rnd === 1)
     {
         let s = getRandomInt(15, 30);
-        let e = getRandomInt(1, 10);
+        let e = getRandomInt(2, 6);
 
         currentQuestion = `C(${s}, ${e}) - combien de possibilités de prendre X éléments d'un groupe de Y?`;
-        currentAnswer = factorielle(s) / factorielle(s - e) / factorielle(e);
+        currentAnswer = `${Math.round(factorielle(s) / factorielle(s - e) / factorielle(e))}`;
     }
     else if (rnd === 2)
     {
         let s = getRandomInt(2, 9);
         let e = getRandomInt(2, 9);
 
-        currentQuestion = `Racine ${s}e de ${e} = ?`;
-        currentAnswer = Math.pow(e, s);
+        currentQuestion = `Racine ${s}e de ${Math.round(Math.pow(e, s))} = ?`;
+        currentAnswer = `${e}`;
     }
     else if (rnd === 3)
     {
@@ -54,7 +54,7 @@ let generateQuestion = function()
         let n1 = 1, n2 = 1;
         let i;
 
-        for(i = 0; i < 5; i++)
+        for(i = 0; i < 3; i++)
         {
             let p1 = firstPrimes[getRandomInt(0, firstPrimes.length - 1)];
             let p2 = firstPrimes[getRandomInt(0, firstPrimes.length - 1)];
@@ -84,7 +84,7 @@ let generateQuestion = function()
     {
         let s = getRandomInt(5, 20);
         currentQuestion = `S'il y a ${s} personnes qui trinquent, combien de verres se touchent?`;
-        currentAnswer = `${s * (s + 1) / 2}`;
+        currentAnswer = `${Math.round(s * (s - 1) / 2)}`;
     }
 
     console.log('Question: ' + currentQuestion);
@@ -103,7 +103,7 @@ module.exports = {
                 channel.send('Que le jeu commence...');
 
                 generateQuestion();
-                channel.send('Q' + (currentQuestionNb + 1) + ': ' + currentQuestion);
+                channel.send('Q' + currentQuestionNb + ': ' + currentQuestion);
             });
 
         client.on("message",
@@ -148,7 +148,7 @@ module.exports = {
                     message.channel.send(`Félicitations! C'est un point pour <@${message.author.id}> pour un total de ${joueur.points}`);
 
                     generateQuestion();
-                    message.channel.send('Q' + (currentQuestionNb + 1) + ': ' + currentQuestion);
+                    message.channel.send('Q' + currentQuestionNb + ': ' + currentQuestion);
                     mauvaisesReponses = 0;
                 }
                 else
@@ -158,7 +158,7 @@ module.exports = {
                     if (mauvaisesReponses >= 12)
                     {
                         message.channel.send(`Je vais répéter la question au cas où:`);
-                        message.channel.send('Q' + (currentQuestionNb + 1) + ': ' + currentQuestion);
+                        message.channel.send('Q' + currentQuestionNb + ': ' + currentQuestion);
                         mauvaisesReponses = 0;
                     }
                 }
