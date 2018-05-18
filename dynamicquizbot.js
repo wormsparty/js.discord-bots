@@ -34,7 +34,7 @@ let generateQuestion = function()
     else if (rnd === 1)
     {
         let s = getRandomInt(15, 30);
-        let e = getRandomInt(2, 6);
+        let e = getRandomInt(2, 4);
 
         currentQuestion = `C(${s}, ${e}) - combien de possibilités de prendre X éléments d'un groupe de Y?`;
         currentAnswer = `${Math.round(factorielle(s) / factorielle(s - e) / factorielle(e))}`;
