@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const client = new discord.Client();
 const normalize = require('normalize-strings');
 const request = require('request');
+const decode = require('unescape');
 
 let joueurs = {};
 let consideredChannel = "446385944040308786";
@@ -18,8 +19,15 @@ let generateQuestion = function(after)
         if (!error && response.statusCode === 200) {
             let json = JSON.parse(body);
 
-            currentQuestion = json.results[0].question;
-            currentAnswer = normalize(json.results[0].correct_answer.toLowerCase().trim());
+            currentQuestion = decode(decodeURIComponent(json.results[0].question));
+
+            // Try and ignore list questions
+            if (currentQuestion.indexOf('follow') > -1) {
+                generateQuestion(after);
+                return;
+            }
+
+            currentAnswer = normalize(decode(decodeURIComponent(json.results[0].correct_answer)).toLowerCase().trim());
 
             console.log('Question: ' + currentQuestion);
             console.log('Réponse: ' + currentAnswer);
@@ -37,7 +45,7 @@ module.exports = {
                 client.user.setActivity(``);
                 let channel = client.channels.get(consideredChannel);
 
-                channel.send(`Voici le trivia-quiz! Les questions ne sont pas de moi mais de opentdb.com. N'hésitez donc pas à utiliser tonton Google. !joker permet de sauter la question car parfois faut pas déconner...`);
+               channel.send(`Voici le trivia-quiz! Les questions ne sont pas de moi mais de opentdb.com. N'hésitez donc pas à utiliser tonton Google. !joker permet de sauter la question car parfois faut pas déconner...`);
 
                 generateQuestion(function() {
                     channel.send('Q' + currentQuestionNb + ': ' + currentQuestion);
