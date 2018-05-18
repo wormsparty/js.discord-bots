@@ -66,7 +66,7 @@ let generateQuestion = function()
         }
         else if (r === 3)
         {
-            currentQuestion = `int(${s}/${e})`;
+            currentQuestion = `⌊${s}/${e}⌋`;
             currentAnswer = `${Math.floor(s/e)}`;
         }
     }
