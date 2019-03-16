@@ -1,0 +1,6 @@
+var config = {};
+
+config.channels = [ "REPLACE_ME" ];
+config.token = "REPLACE_ME";
+
+module.exports = config;
