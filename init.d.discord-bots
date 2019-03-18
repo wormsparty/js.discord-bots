@@ -12,25 +12,28 @@
 ### END INIT INFO
 
 # Variables
-PGREP=/usr/bin/pgrep
-FILE_PATH=/home/wormsparty/discord-bots.go
-EXECUTABLE=discord-bots.go
+PGREP="/usr/bin/pgrep"
+FILE_PATH="/home/wormsparty/js.discord-bots"
+FILENAME="runbot.js"
+EXECUTABLE="node $FILENAME"
+NAME="discord-bots"
 ZERO=0
-TIMEOUT=5
+TIMEOUT=2
 
 start() {
-    echo "Starting discord-bots..."
-    $PGREP -f $EXECUTABLE > /dev/null
+    echo "Starting $NAME..."
+    $PGREP -f node > /dev/null
     VERIFIER=$?
 
     if [ $ZERO = $VERIFIER ]
     then
         echo "The service is already running"
     else
-        $FILE_PATH/$EXECUTABLE > /dev/null 2>&1 &
-        sleep $TIMEOUT
+	cd $FILE_PATH
+        $EXECUTABLE > /dev/null 2>&1 &
+	sleep $TIMEOUT
 
-        $PGREP -f $EXECUTABLE > /dev/null
+        $PGREP -f node > /dev/null
         VERIFIER=$?
 
         if [ $ZERO = $VERIFIER ]
@@ -44,17 +47,17 @@ start() {
 }
 
 stop() {
-    echo "Stopping discord-bots..."
-    $PGREP -f $EXECUTABLE > /dev/null
+    echo "Stopping $NAME..."
+    $PGREP -f node > /dev/null
     VERIFIER=$?
 
     if [ $ZERO = $VERIFIER ]
     then
-        kill -9 $($PGREP -f $EXECUTABLE)
-        sleep 10
-        $PGREP -f $EXECUTABLE > /dev/null
+        kill -9 $($PGREP -f node)
+        sleep $TIMEOUT
+        $PGREP -f node > /dev/null
         VERIFIER=$?
-        
+
         if [ $ZERO = $VERIFIER ]
         then
             echo "Failed to stop service"
@@ -68,8 +71,8 @@ stop() {
 }
 
 status() {
-    echo "Checking status of discord-bots..."
-    $PGREP -f $EXECUTABLE > /dev/null
+    echo "Checking status of $NAME..."
+    $PGREP -f node > /dev/null
     VERIFIER=$?
 
     if [ $ZERO = $VERIFIER ]
