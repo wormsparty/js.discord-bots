@@ -889,12 +889,6 @@ function onMessage(message, channelState) {
                 if (!channelState.FormattedWord.includes("\\_")) {
                     message.channel.send("Bravo <@" + message.author.id + ">, un point!");
 
-                    console.log("Participations: " + participant.CurrentParticipations);
-                    console.log("Errors: " + channelState.CurrentErrors);
-                    console.log("Achievement King: " + participant.AchievementKing);
-                    console.log("Achievement Opportunist: " + participant.AchievementOpportinist);
-                    console.log("Achievement So Close: " + participant.AchievementSoClose);
-
                     if (channelState.CurrentParticipants.length === 1 && !participant.AchievementKing && channelState.CurrentErrors === 0) {
                         message.channel.send("ACHIEVEMENT UNLOCKED!\nRoi: Réussir un mot seul, sans erreur");
                         participant.AchievementKing = true;
@@ -924,11 +918,6 @@ function onMessage(message, channelState) {
 
                     if (channelState.CurrentErrors === maxErrors) {
                         message.channel.send("Dommage! C'était: " + channelState.CurrentWord + ". On réessaye?");
-
-                        console.log("Participants: " + channelState.CurrentParticipants + " (" + channelState.CurrentParticipants.length + ")");
-                        console.log("Combo: " + channelState.Combo);
-                        console.log("Achievement Combo: " + participant.AchievementComboBreaker);
-                        console.log("Achievement Loner: " + participant.AchievementLoner);
 
                         if (channelState.CurrentParticipants.length === 1 && !participant.AchievementLoner) {
                             message.channel.send("ACHIEVEMENT UNLOCKED!\nI'm a lonely loner (alone): Être le seul à participer à un mot (... et perdre)");
