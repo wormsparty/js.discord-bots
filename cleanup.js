@@ -3,8 +3,8 @@ const discord = require("discord.js");
 const client = new discord.Client();
 const config = require('./config.js');
 
-function fetchAndDeleteMessages(before) {
-    const channel = client.channels.cache.get(config.channels[0]);
+function fetchAndDeleteMessages(channelId, before) {
+    const channel = client.channels.cache.get(channelId);
 
     channel.messages.fetch({ limit: 100, before: before }).then(messages => {
         const mobsMessages = messages.filter(msg => msg.author.id === "387231361485766656").array();
@@ -12,12 +12,17 @@ function fetchAndDeleteMessages(before) {
         if (mobsMessages.length > 0)
         {
             for(let i = 0 ; i < mobsMessages.length; i++) {
+                //console.log("Je supprimerais: " + mobsMessages[i].content);
                 mobsMessages[i].delete();
             }
+
+            console.log(mobsMessages.length + " messages supprimés");
         }
 
         if (messages.size > 0) {
-            fetchAndDeleteMessages(messages.last().id)
+            fetchAndDeleteMessages(channelId, messages.last().id);
+        } else {
+            console.log('Done !');
         }
 
     });
@@ -26,7 +31,9 @@ function fetchAndDeleteMessages(before) {
 function run() {
     console.log(`cleanup-bot has started`);
 
-    fetchAndDeleteMessages(undefined);
+    for (let j = 0; j < config.channels.length; j++) {
+        fetchAndDeleteMessages(config.channels[j], undefined);
+    }
 }
 
 module.exports = {
